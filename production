@@ -1,0 +1,4 @@
+# inventory file for production
+
+[webservers]
+localhost ansible_connection=local
