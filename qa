@@ -1,0 +1,7 @@
+# inventory file for qa
+
+[webservers]
+webserver1  ansible_host=192.168.61.3
+
+[databases]
+database1 ansible_host=192.168.61.4

@@ -1,0 +1,3 @@
+---
+# vars file for webserver
+application_repo: git://github.com/madhums/node-express-mongoose-demo.git

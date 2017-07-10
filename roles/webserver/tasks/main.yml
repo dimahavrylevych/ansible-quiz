@@ -1,0 +1,56 @@
+---
+# tasks file for webserver
+- name: install EPEL
+  yum:
+   name: 'epel-release'
+   state: installed
+  when: ansible_os_family == "RedHat"
+
+- name: install dependencies
+  package: name={{item}} state=installed
+  with_items:
+       - nodejs
+       - git
+
+- name: isntall nodejs dependencies
+  npm:
+   name: express-generator
+   global: yes
+
+- name: download application
+  git:
+    repo: "{{ application_repo }}"
+    dest: "{{ application_home }}"
+    update: no
+
+- name: install packages from package.json.
+  npm:
+    path: "{{ application_home }}"
+
+- name: modify config file with db props
+  replace:
+    path: "{{ application_home }}/config/env/development.js"
+    regexp: 'mongodb://localhost/noobjs_dev'
+    replace: 'mongodb://192.168.61.4/noobjs_dev'
+    backup: yes
+
+- name: prepare env vars
+  template:
+   src: env.j2
+   dest: "{{ application_home }}/.env"
+   backup: yes
+  notify:
+    - start nodejs app
+
+- meta: flush_handlers
+
+- name: wait for app to start
+  uri:
+   url: "http://{{ ansible_eth1.ipv4.address }}:3000/"
+   status_code: 200
+   follow_redirects: all
+   timeout: 120
+  register: webpage
+  until: webpage.status == 200
+  retries: 10
+  delay: 10

@@ -1,0 +1,15 @@
+---
+#
+- name: database
+  hosts: databases
+  gather_facts: yes
+  become: yes
+  roles:
+    - database
+    
+- name: webserver
+  hosts: webservers
+  gather_facts: yes
+  become: yes
+  roles:
+    - webserver
