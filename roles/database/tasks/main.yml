@@ -12,3 +12,8 @@
    backup: yes
   notify:
   - restart mongodb
+
+- name: ensure mongodb running
+  service:
+    name: mongodb
+    state: started

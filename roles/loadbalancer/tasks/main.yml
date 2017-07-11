@@ -1,5 +1,11 @@
 ---
 # tasks file for loadbalancer
+- name: install EPEL
+  yum:
+   name: 'epel-release'
+   state: installed
+  when: ansible_os_family == "RedHat"
+
 - name: install packages
   package: name={{item}} state=installed
   with_items:
