@@ -1,0 +1,11 @@
+# Molecule managed
+
+---
+all:
+  hosts:
+    instance-centos-default: &id001
+      ansible_connection: docker
+ungrouped:
+  hosts:
+    instance-centos-default: *id001
+  vars: {}

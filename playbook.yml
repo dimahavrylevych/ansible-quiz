@@ -1,15 +1,29 @@
 ---
 #
+- name: hosts
+  hosts: all
+  gather_facts: yes
+  become: yes
+  roles:
+    - hosts
+
 - name: database
   hosts: databases
-  gather_facts: yes
+  gather_facts: no
   become: yes
   roles:
     - database
-    
+
 - name: webserver
   hosts: webservers
-  gather_facts: yes
+  gather_facts: no
   become: yes
   roles:
     - webserver
+
+- name: proxy
+  hosts: proxies
+  gather_facts: no
+  become: yes
+  roles:
+    - loadbalancer

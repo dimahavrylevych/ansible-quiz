@@ -2,6 +2,10 @@
 
 [webservers]
 webserver1  ansible_host=192.168.61.3
+webserver2  ansible_host=192.168.61.6
 
 [databases]
 database1 ansible_host=192.168.61.4
+
+[proxies]
+proxy1 ansible_host=192.168.61.5

@@ -5,6 +5,7 @@
   with_items:
        - nginx
        - libsemanage-python
+       - python-passlib
 
 - name: selinux open http
   seboolean:
@@ -36,7 +37,7 @@
    path: /etc/nginx/.htpasswd
    name: zippy
    password: "{{ proxy_password }}"
-   mode: 0640
+   mode: 0644
   notify:
   - restart nginx
 

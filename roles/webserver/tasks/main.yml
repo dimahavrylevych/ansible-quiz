@@ -11,10 +11,11 @@
   with_items:
        - nodejs
        - git
+       - npm
 
 - name: isntall nodejs dependencies
   npm:
-   name: express-generator
+   name: forever
    global: yes
 
 - name: download application
@@ -31,7 +32,7 @@
   replace:
     path: "{{ application_home }}/config/env/development.js"
     regexp: 'mongodb://localhost/noobjs_dev'
-    replace: 'mongodb://192.168.61.4/noobjs_dev'
+    replace: "mongodb://{{ hostvars['database1']['ansible_host'] }}/noobjs_dev"
     backup: yes
 
 - name: prepare env vars
