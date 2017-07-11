@@ -1,2 +1,7 @@
 ---
 # tasks file for hosts
+- name: update hosts file
+  template:
+   src: hosts.j2
+   dest: /etc/hosts
+   backup: yes

@@ -1,0 +1,5 @@
+upstream backend  {
+{% for host in groups['webservers'] %}
+  server {{ hostvars[host].ansible_host }}:300;
+{% endfor %}
+}
