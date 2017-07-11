@@ -1,6 +1,7 @@
 ---
 # handlers file for webserver
 - name: start nodejs app
-  shell: forever start server.js
-  args:
-    chdir: "{{ application_home }}"
+  service:
+    name: app
+    state: started
+    enabled: yes

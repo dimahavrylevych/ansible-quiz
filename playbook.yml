@@ -1,5 +1,4 @@
 ---
-#
 - name: hosts
   hosts: all
   gather_facts: yes

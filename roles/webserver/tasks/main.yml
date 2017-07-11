@@ -35,6 +35,12 @@
     replace: "mongodb://{{ hostvars['database1']['ansible_host'] }}/noobjs_dev"
     backup: yes
 
+- name: set firewall rules
+  firewalld:
+    port: 80/tcp
+    permanent: true
+    state: enabled
+    
 - name: prepare env vars
   template:
    src: env.j2
@@ -43,7 +49,20 @@
   notify:
     - start nodejs app
 
+- name: create systemd service
+  template:
+   src: app.service.j2
+   dest: /etc/systemd/system/
+   backup: yes
+  notify:
+   - start nodejs app
+
 - meta: flush_handlers
+
+- name: ensure app running
+  service:
+    name: app
+    state: started
 
 - name: wait for app to start
   uri:

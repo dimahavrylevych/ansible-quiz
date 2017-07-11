@@ -19,6 +19,12 @@
     state: yes
     persistent: yes
 
+- name: set firewall rules
+  firewalld:
+    port: 27017/tcp
+    permanent: true
+    state: enabled
+    
 - name: copy proxy config
   template:
    src: proxy.j2
@@ -52,7 +58,7 @@
     name: nginx
     state: started
 
-- name: ensure nginx running
+- name: ensure nginx available
   uri:
    url: "http://{{ ansible_host }}/"
    follow_redirects: all

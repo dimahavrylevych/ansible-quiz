@@ -13,7 +13,20 @@
   notify:
   - restart mongodb
 
+- name: set firewall rules
+  firewalld:
+    port: 27017/tcp
+    permanent: true
+    state: enabled
+
 - name: ensure mongodb running
   service:
     name: mongodb
     state: started
+
+- name: ensure port is open
+  wait_for:
+    host: 0.0.0.0
+    port: 27017
+    delay: 10
+    state: present
