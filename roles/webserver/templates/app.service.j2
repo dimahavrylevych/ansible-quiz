@@ -1,11 +1,11 @@
 [Service]
-ExecStart=/usr/bin/node {{ application_home }}/server.js
+ExecStart=/usr/bin/npm start {{ application_home }}/server.js
 Restart=always
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=exam_application
 User={{ ansible_user_id }}
-Group={{ ansible_group_id}}
+Group={{ ansible_user_id}}
 Environment=NODE_ENV=development
 
 [Install]
