@@ -1,7 +1,7 @@
 ---
 # handlers file for database
 - name: restart mongodb
-  systemd:
-    state: restarted
+  service:
+    state: running
     name: mongodb
-    enabled: True
+    enabled: yes
