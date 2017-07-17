@@ -47,22 +47,18 @@
    dest: "{{ application_home }}/.env"
    backup: yes
   notify:
-    - start nodejs app
+    - reload nodejs app
 
 - name: create systemd service
   template:
    src: app.service.j2
    dest: /etc/systemd/system/app.service
    backup: yes
+   mode: 0751
   notify:
-   - start nodejs app
+   - reload nodejs app
 
 - meta: flush_handlers
-
-- name: ensure app running
-  service:
-    name: app
-    state: started
 
 - name: wait for app to start
   uri:

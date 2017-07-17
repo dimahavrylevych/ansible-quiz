@@ -1,2 +1,3 @@
 ---
 application_home: /home/vagrant/app
+#ansible_ssh_pass: vagrant

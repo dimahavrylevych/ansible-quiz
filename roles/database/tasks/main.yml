@@ -4,6 +4,8 @@
   package: name={{item}} state=installed
   with_items:
        - mongodb
+  environment:
+    PATH: "{{ lookup('env', 'PATH') }}"
 
 - name: prepare mongodb config file
   template:
@@ -13,14 +15,16 @@
   notify:
   - restart mongodb
 
+- meta: flush_handlers
+
 - name: ensure mongodb running
   service:
-    name: mongodb
     state: started
+    name: mongodb
 
 - name: ensure port is open
   wait_for:
     host: 0.0.0.0
     port: 27017
     delay: 10
-    state: present
+    state: started

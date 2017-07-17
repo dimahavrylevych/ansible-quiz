@@ -19,12 +19,6 @@
     state: yes
     persistent: yes
 
-- name: set firewall rules
-  firewalld:
-    port: 27017/tcp
-    permanent: true
-    state: enabled
-    
 - name: copy proxy config
   template:
    src: proxy.j2
@@ -44,7 +38,7 @@
   notify:
   - restart nginx
 
-- name: copy htpasswd
+- name: generate htpasswd
   htpasswd:
    path: /etc/nginx/.htpasswd
    name: zippy
@@ -52,6 +46,8 @@
    mode: 0644
   notify:
   - restart nginx
+
+- meta: flush_handlers
 
 - name: ensure nginx running
   service:

@@ -1,7 +1,6 @@
 ---
 # handlers file for database
 - name: restart mongodb
-  service:
-    state: running
-    name: mongodb
-    enabled: yes
+  command: service mongodb restart
+  environment:
+    PATH: "{{ lookup('env', 'PATH') }}"

@@ -1,5 +1,6 @@
 [Service]
-ExecStart=/usr/bin/npm start {{ application_home }}/server.js
+WorkingDirectory={{ application_home }}
+ExecStart=/usr/bin/npm start server.js
 Restart=always
 StandardOutput=syslog
 StandardError=syslog

@@ -1,7 +1,21 @@
 ---
 # handlers file for webserver
+
+
 - name: start nodejs app
-  service:
-    name: app
+  systemd:
     state: started
+    daemon_reload: yes
+    name: app
     enabled: yes
+  environment:
+    PATH: "{{ lookup('env', 'PATH') }}"
+
+- name: reload nodejs app
+  systemd:
+    state: restarted
+    name: app
+    daemon_reload: yes
+    enabled: yes
+  environment:
+    PATH: "{{ lookup('env', 'PATH') }}"

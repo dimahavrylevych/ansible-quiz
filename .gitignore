@@ -1,1 +1,1 @@
-vault
+vault, .vagrant/, *.retry
