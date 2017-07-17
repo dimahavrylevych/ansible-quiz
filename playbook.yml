@@ -9,7 +9,7 @@
 - name: database
   hosts: databases
   gather_facts: no
-  become: yes
+  become: true
   roles:
     - database
 
