@@ -1,6 +1,0 @@
-- name: database
-  hosts: databases
-  gather_facts: yes
-  become: true
-  roles:
-    - database
