@@ -12,6 +12,7 @@
        - nodejs
        - git
        - npm
+       - openssl
 
 - name: isntall nodejs dependencies
   npm:
